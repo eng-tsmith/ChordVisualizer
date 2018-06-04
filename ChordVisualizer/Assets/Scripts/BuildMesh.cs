@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BuildMesh : MonoBehaviour {
 
+    // start as Hexaeder
     public Vector3 vertltf = new Vector3(-1, 1, 1);
     public Vector3 vertrtf = new Vector3(1, 1, 1);
     public Vector3 vertlbf = new Vector3(-1, -1, 1);
@@ -12,6 +13,11 @@ public class BuildMesh : MonoBehaviour {
     public Vector3 vertltb = new Vector3(-1, 1, -1);
     public Vector3 vertrbb = new Vector3(1, -1, -1);
     public Vector3 vertlbb = new Vector3(-1, -1, -1);
+
+    private float defaultT = 1f;
+    private float timerT = 1f;
+
+    public int shapeN = 0;
 
     // Use this for initialization
     void Start () {
@@ -137,6 +143,68 @@ public class BuildMesh : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+
+        if (timerT > 0f) {
+            timerT -= Time.deltaTime;
+        }
+        else {
+            timerT = defaultT;
+        }
+
+        //cube
+        if (shapeN == 0)
+        {
+            vertltf = Vector3.Lerp(vertltf, new Vector3(-1, 1, 1), Time.deltaTime);
+            vertrtf = Vector3.Lerp(vertrtf, new Vector3(1, 1, 1), Time.deltaTime);
+            vertltb = Vector3.Lerp(vertltb, new Vector3(-1, 1, -1), Time.deltaTime);
+            vertrtb = Vector3.Lerp(vertrtb, new Vector3(1, 1, -1), Time.deltaTime);
+
+            vertlbf = Vector3.Lerp(vertlbf, new Vector3(-1, -1, 1), Time.deltaTime);
+            vertrbf = Vector3.Lerp(vertrbf, new Vector3(1, -1, 1), Time.deltaTime);
+            vertlbb = Vector3.Lerp(vertlbb, new Vector3(-1, -1, -1), Time.deltaTime);
+            vertrbb = Vector3.Lerp(vertrbb, new Vector3(1, -1, -1), Time.deltaTime);
+        }
+        // tetra
+        if (shapeN == 1)
+        {
+            vertltf = Vector3.Lerp(vertltf, new Vector3(0, 1, 0), Time.deltaTime);
+            vertrtf = Vector3.Lerp(vertrtf, new Vector3(0, 1, 0), Time.deltaTime);
+            vertltb = Vector3.Lerp(vertltb, new Vector3(0, 1, 0), Time.deltaTime);
+            vertrtb = Vector3.Lerp(vertrtb, new Vector3(0, 1, 0), Time.deltaTime);
+
+            vertlbf = Vector3.Lerp(vertlbf, new Vector3(-1, -1, 1), Time.deltaTime);
+            vertrbf = Vector3.Lerp(vertrbf, new Vector3(1, -1, 1), Time.deltaTime);
+            vertlbb = Vector3.Lerp(vertlbb, new Vector3(-1, -1, -1), Time.deltaTime);
+            vertrbb = Vector3.Lerp(vertrbb, new Vector3(1, -1, -1), Time.deltaTime);
+        }
+        //ramp
+        if (shapeN == 2)
+        {
+            vertltf = Vector3.Lerp(vertltf, new Vector3(-1, -1, 2), Time.deltaTime);
+            vertrtf = Vector3.Lerp(vertrtf, new Vector3(1, -1, 2), Time.deltaTime);
+            vertltb = Vector3.Lerp(vertltb, new Vector3(-1, 0.5f, -1), Time.deltaTime);
+            vertrtb = Vector3.Lerp(vertrtb, new Vector3(1, 0.5f,-1), Time.deltaTime);
+
+            vertlbf = Vector3.Lerp(vertlbf, new Vector3(-1, -1, 1), Time.deltaTime);
+            vertrbf = Vector3.Lerp(vertrbf, new Vector3(1, -1, 1), Time.deltaTime);
+            vertlbb = Vector3.Lerp(vertlbb, new Vector3(-1, -1, -1), Time.deltaTime);
+            vertrbb = Vector3.Lerp(vertrbb, new Vector3(1, -1, -1), Time.deltaTime);
+        }
+        // roof
+        if (shapeN == 3)
+        {
+            vertltf = Vector3.Lerp(vertltf, new Vector3(-1, 0.2f, 0), Time.deltaTime);
+            vertrtf = Vector3.Lerp(vertrtf, new Vector3(1, 0.2f, 0), Time.deltaTime);
+            vertltb = Vector3.Lerp(vertltb, new Vector3(-1, 0.2f, 0), Time.deltaTime);
+            vertrtb = Vector3.Lerp(vertrtb, new Vector3(1, 0.2f, 0), Time.deltaTime);
+
+            vertlbf = Vector3.Lerp(vertlbf, new Vector3(-1, -1, 1), Time.deltaTime);
+            vertrbf = Vector3.Lerp(vertrbf, new Vector3(1, -1, 1), Time.deltaTime);
+            vertlbb = Vector3.Lerp(vertlbb, new Vector3(-1, -1, -1), Time.deltaTime);
+            vertrbb = Vector3.Lerp(vertrbb, new Vector3(1, -1, -1), Time.deltaTime);
+        }
+
+        Start();
+
+    }
 }
